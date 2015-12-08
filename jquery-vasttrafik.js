@@ -1,18 +1,25 @@
+/*! jquery-vasttrafik v1.0 | (c) 2015 Joel Eriksson | https://github.com/itggot-joel-eriksson/jquery-vasttrafik/blob/master/LICENSE */
 (function($) {
     $.fn.vasttrafik = function(options, callback) {
-        $(this.selector).html("Hello world!")
+        var target = this.selector;
 
         var api;
         var response = {};
 
         var defaults = {
             url: "https://api.fam-ericsson.se/vasttrafik/?id=",
-            id: "9021014001960000",
+            stopId: "9021014001960000",
             method: "GET",
             crossDomain: true,
             cache: false,
             departureNow: "now",
-            departureNone: "No departures"
+            departureNone: "No departures",
+            lineColors: {
+                55: {
+                    bgColor: "#EAF5CC",
+                    fgColor: "#3AB73D"
+                }
+            }
         };
 
         var settings = $.extend({}, defaults, options);
@@ -25,7 +32,7 @@
         }
 
         $.ajax({
-            url: settings.url + settings.id + "&nocache=" + Date.now(),
+            url: settings.url + settings.stopId,
             method: settings.method,
             crossDomain: settings.crossDomain,
             cache: settings.cache,
@@ -68,11 +75,10 @@
             success: function(data) {
                 response.success= true;
                 api = data;
-
                 if (api.trafik !== null) {
             		var serverTime = api.serverDateTime.unixTimestamp;
 
-            		$(this.selector).html("");
+            		$(target).html("");
 
             		$.each(api.trafik, function(currentFirst, linjeinfo) {
             			$.each(linjeinfo.avgang, function(currentSecond, avgang) {
@@ -90,11 +96,16 @@
             					darefter = departureNow;
             				}
 
-            				$(this.selector).append("<tr><td class='linje' style='background-color: " + linjeinfo.bgFarg + "; color: " + linjeinfo.fgFarg + ";'>" + linjeinfo.linje + "</td><td> " + avgang.resmal + " </td><td class='lage'>" + avgang.lage[0] + "</td><td class='tid'>" + nasta + "</td><td class='tid'>" + darefter + "</td>");
+                            if (typeof settings.lineColors[linjeinfo.linje] === typeof {}) {
+                                linjeinfo.bgFarg = settings.lineColors[linjeinfo.linje].bgColor;
+                                linjeinfo.fgFarg = settings.lineColors[linjeinfo.linje].fgColor;
+                            }
+
+            				$(target).append("<tr><td class='linje' style='background-color: " + linjeinfo.bgFarg + "; color: " + linjeinfo.fgFarg + ";'>" + linjeinfo.linje + "</td><td> " + avgang.resmal + " </td><td class='lage'>" + avgang.lage[0] + "</td><td class='tid'>" + nasta + "</td><td class='tid'>" + darefter + "</td>");
             			});
             		});
             	} else {
-            		$(this.selector).html("<tr><td class='linje' style='background-color: #F44336; color: #FFFFFF'>-</td><td>" + settings.departureNone + "</td><td class='lage'>-</td><td class='tid'>60+</td><td class='tid'>-</td>");
+            		$(target).html("<tr><td class='linje' style='background-color: #F44336; color: #FFFFFF'>-</td><td>" + settings.departureNone + "</td><td class='lage'>-</td><td class='tid'>60+</td><td class='tid'>-</td>");
             	}
             },
             error: function(error) {
@@ -102,9 +113,9 @@
             }
         });
 
-        response.target = this.selector
+        response.target = target;
 
-        if (typeof callback == 'function') {
+        if (typeof callback == "function") {
             return callback(response);
         }
         return response;
