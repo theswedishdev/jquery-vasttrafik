@@ -1,0 +1,11 @@
+#HTML
+*.html
+*.htm
+
+#Node.js
+/node_modules
+server.js
+
+#jQuery
+jquery.js
+jquery.min.js
