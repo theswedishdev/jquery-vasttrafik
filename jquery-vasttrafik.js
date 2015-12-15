@@ -12,6 +12,7 @@
             method: "GET",
             crossDomain: true,
             cache: false,
+            async: true,
             departureNow: "now",
             departureNone: "No departures",
             lineColors: {
