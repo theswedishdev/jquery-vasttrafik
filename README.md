@@ -86,7 +86,7 @@ $("#realtime").vasttrafik({
             fgColor: "#3AB73D"
         }
     }
-});
+}, function() { /*Callback*/ });
 ```
 
 ### PRO-TIPS
