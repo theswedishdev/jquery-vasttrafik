@@ -69,6 +69,26 @@ $("#realtime").vasttrafik();
 ###### Callback
 The callback returns wheather the AJAX call succeeded or not and a reason together with an HTTP status code.
 
-###### PRO-TIPS
+###### Example
+```javascript
+$("#chalmersplatsenTable").vasttrafik({
+    url: "https://api.fam-ericsson.se/vasttrafik/?id=",
+    stopId: "9021014001960000",
+    method: "GET",
+    crossDomain: true,
+    cache: false,
+    async: true,
+    departureNow: "now",
+    departureNone: "No departures",
+    lineColors: {
+        55: {
+            bgColor: "#EAF5CC",
+            fgColor: "#3AB73D"
+        }
+    }
+});
+```
+
+### PRO-TIPS
 - jquery-vasttrafik does not run on any interval. If you would want the data to reload you could use `setInterval`. Just keep in mind that it is not necessary to update more than once per minute altought the JSON response is cached for 30 seconds.
 - The API is hosted at [api.fam-ericsson.se](https://api.fam-ericsson.se/vasttrafik), if you would like to host it yourself create a new [issue](https://github.com/itggot-joel-eriksson/jquery-vasttrafik/issues). The only prerequisite is that you have a server with PHP version >= 5.6 installed.
