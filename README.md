@@ -43,7 +43,7 @@ or the minified version
             Thereafter
         </th>
     </thead>
-    <tbody id="#realtime"></tbody>
+    <tbody id="realtime"></tbody>
 </table>
 ```
 ##### JavaScript
@@ -71,7 +71,7 @@ The callback returns wheather the AJAX call succeeded or not and a reason togeth
 
 ###### Example
 ```javascript
-$("#chalmersplatsenTable").vasttrafik({
+$("#realtime").vasttrafik({
     url: "https://api.fam-ericsson.se/vasttrafik/?id=",
     stopId: "9021014001960000",
     method: "GET",
