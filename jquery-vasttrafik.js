@@ -1,7 +1,11 @@
-/*! jquery-vasttrafik v1.0 | (c) 2015 Joel Eriksson | https://github.com/itggot-joel-eriksson/jquery-vasttrafik/blob/master/LICENSE */
+/**
+ * jquery-vasttrafik v1.1
+ * (c) 2015-2016 Joel Eriksson
+ * https://github.com/itggot-joel-eriksson/jquery-vasttrafik/blob/master/LICENSE
+ */
 (function($) {
     $.fn.vasttrafik = function(options, callback) {
-        var target = this.selector;
+        var target = this;
 
         var api;
         var response = {};
