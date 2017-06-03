@@ -2,10 +2,10 @@
 A jQuery plugin for retrieving realtime data from Västtrafik, the company running public transit in Västra Götaland, Sweden
 
 ### Demo
-A demo of jquery-vasttrafik is available [here](https://joel.f-eri.me/ITG-Infoskarm).
+A demo of jquery-vasttrafik is available [here](https://joel-eriksson.github.io/ITG-Infoskarm).
 
 ### Download
-Either git clone this repository or download from [releases](https://github.com/itggot-joel-eriksson/jquery-vasttrafik/releases).
+Either git clone this repository or download from [releases](https://github.com/joel-eriksson/jquery-vasttrafik/releases).
 
 ### Including it in your project
 Include jQuery either before closing `</head>` or `</body>`
@@ -91,4 +91,4 @@ $("#realtime").vasttrafik({
 
 ### PRO-TIPS
 - jquery-vasttrafik does not run on any interval. If you would want the data to reload you could use `setInterval`. Just keep in mind that it is not necessary to update more than once per minute altought the JSON response is cached for 30 seconds.
-- The API is hosted at [api.fam-ericsson.se](https://api.fam-ericsson.se/vasttrafik), if you would like to host it yourself create a new [issue](https://github.com/itggot-joel-eriksson/jquery-vasttrafik/issues/new). The only prerequisite is that you have a server with PHP version >= 5.6 installed.
+- The API is hosted at [api.fam-ericsson.se](https://api.fam-ericsson.se/vasttrafik), if you would like to host it yourself create a new [issue](https://github.com/joel-eriksson/jquery-vasttrafik/issues/new). The only prerequisite is that you have a server with PHP version >= 5.6 installed.
