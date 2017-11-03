@@ -1,7 +1,7 @@
 /**
- * jquery-vasttrafik v1.1
- * (c) 2015-2016 Joel Eriksson
- * https://github.com/itggot-joel-eriksson/jquery-vasttrafik/blob/master/LICENSE
+ * jquery-vasttrafik v1.2
+ * (c) 2015-2017 Joel Ericsson
+ * https://github.com/joel-eriksson/jquery-vasttrafik/blob/master/LICENSE
  */
 (function($) {
     $.fn.vasttrafik = function(options, callback) {
@@ -98,7 +98,7 @@
             					nasta = settings.departureNow;
             				}
             				if (darefter <= 0) {
-            					darefter = departureNow;
+            					darefter = settings.departureNow;
             				}
 
                             if (typeof settings.lineColors[linjeinfo.linje] === typeof {}) {
