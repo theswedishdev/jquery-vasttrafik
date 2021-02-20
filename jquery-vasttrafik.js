@@ -1,6 +1,6 @@
 /**
  * jquery-vasttrafik v1.2
- * (c) 2015-2017 Joel Ericsson
+ * (c) 2015-2021 Joel Ericsson
  * https://github.com/joel-eriksson/jquery-vasttrafik/blob/master/LICENSE
  */
 (function($) {
@@ -11,20 +11,15 @@
         var response = {};
 
         var defaults = {
-            url: "https://api.fam-ericsson.se/vasttrafik/?id=",
-            stopId: "9021014001960000",
+            url: "",
+            stopId: "",
             method: "GET",
             crossDomain: true,
             cache: false,
             async: true,
             departureNow: "now",
             departureNone: "No departures",
-            lineColors: {
-                55: {
-                    bgColor: "#EAF5CC",
-                    fgColor: "#3AB73D"
-                }
-            }
+            lineColors: {}
         };
 
         var settings = $.extend({}, defaults, options);

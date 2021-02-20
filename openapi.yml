@@ -1,0 +1,161 @@
+openapi: 3.0.3
+info:
+  title: "Vasttraik departure board API"
+  version: "1"
+  description: "An API that uses Västtrafik's Reseplaneraren v2 API and formats it better for viewing"
+  contact:
+    name: "Joel Ericsson"
+    url: "https://github.com/joel-eriksson/jquery-vasttrafik/issues/new"
+    
+tags:
+  - name: Departure Board
+  
+paths:
+  /:
+    get:
+      tags:
+        - Departure Board
+      summary: Get departures from a certain station
+      operationId: "getDeparturesFromStop"
+      parameters:
+        - in: query
+          name: id
+          description: "The id for the stop to request departure board for"
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - api
+                  - serverDateTime
+                  - trafik
+                properties:
+                  api:
+                    type: object
+                    required:
+                      - generated
+                      - timezone
+                      - timezoneUnit
+                    properties:
+                      generated:
+                        type: number
+                        description: "When this response was generated, in seconds since the UNIX Epoch"
+                        example: 1613835184
+                      timezone:
+                        type: string
+                        example: "Europe/Stockholm"
+                      timezoneUnit:
+                        type: string
+                        example: "CET"
+                  serverDateTime:
+                    type: object
+                    required:
+                      - unixTimestamp
+                      - serverDate
+                      - time
+                      - dateTime
+                    properties:
+                      unixTimestamp:
+                        type: number
+                        description: "Västtrafik's server time as of when this response was generated, in seconds since the UNIX Epoch"
+                        example: 1613835180
+                      serverDate:
+                        type: string
+                        example: "2021/02/20"
+                      time:
+                        type: string
+                        example: "16:33"
+                      dateTime:
+                        type: string
+                        example: "2021/02/20 16:33"
+                  trafik:
+                    type: object
+                    properties:
+                      $lineNumber:
+                        type: object
+                        required:
+                          - trafiktyp
+                          - linje
+                          - bgFarg
+                          - fgFarg
+                          - avgang
+                        properties:
+                          trafiktyp:
+                            type: string
+                            enum:
+                              - buss
+                              - sparvagn
+                              - bat
+                              - okand
+                            example: "sparvagn"
+                          linje:
+                            type: string
+                            example: "6"
+                          bgFarg:
+                            type: string
+                            example: "#F89828"
+                            pattern: "#[A-F0-9{6}]"
+                          fgFarg:
+                            type: string
+                            example: "#00435C"
+                            pattern: "#[A-F0-9{6}]"
+                          avgang:
+                            type: object
+                            properties:
+                              $destination:
+                                type: object
+                                properties:
+                                  resmal:
+                                    type: string
+                                    example: "Kortedala"
+                                  resmalLang:
+                                    type: string
+                                    example: "Kortedala"
+                                  date:
+                                    type: array
+                                    example:
+                                      - "2021/02/20"
+                                      - "2021/02/20"
+                                    items:
+                                      type: string
+                                  time:
+                                    type: array
+                                    example:
+                                      - "16:43"
+                                      - "16:47"
+                                    items:
+                                      type: string
+                                  dateTime:
+                                    type: array
+                                    example:
+                                      - "2021/02/20 16:43"
+                                      - "2021/02/20 16:47"
+                                    items:
+                                      type: string
+                                  unixTimestamp:
+                                    type: array
+                                    example:
+                                      - 1613835780
+                                      - 1613836020
+                                    items:
+                                      type: number
+                                      description: "Timestamp of departure, in seconds since the UNIX Epoch"
+                                  lage:
+                                    type: array
+                                    example:
+                                      - "A"
+                                      - "A"
+                                    items:
+                                      type: string
+                                  rullstol:
+                                    type: array
+                                    example:
+                                      - true
+                                      - false
+                                    items:
+                                      type: boolean
